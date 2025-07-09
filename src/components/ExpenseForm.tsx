@@ -11,7 +11,10 @@ export default function ExpenseForm({ onExpenseSaved }: Props) {
     const [name, setName] = useState('');
     const [amount, setAmount] = useState('');
     const [person, setPerson] = useState<Person>('Jair');
-    const [month, setMonth] = useState(new Date().toLocaleString('default', { month: 'long', year: 'numeric' }));
+    const [month, setMonth] = useState(() => {
+        const now = new Date()
+        return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`
+    })
 
     const [addExpense, { loading }] = useMutation(ADD_EXPENSE)
 
@@ -50,7 +53,7 @@ export default function ExpenseForm({ onExpenseSaved }: Props) {
     }
 
     function getCurrentMonth(): string {
-        return new Date().toLocaleString('default', { month: 'long', year: 'numeric' })
+        return `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}`
     }
 
     return (
@@ -102,7 +105,7 @@ export default function ExpenseForm({ onExpenseSaved }: Props) {
                 <span className="label-text">Mes</span>
             </label>
             <input
-            type="text"
+            type="month"
             className="input input-bordered"
             placeholder="Ej. Julio 2025"
             value={month}

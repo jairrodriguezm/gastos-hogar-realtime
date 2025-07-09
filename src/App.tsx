@@ -136,10 +136,8 @@ function App() {
   const expenses: Expense[] = data?.gastos ?? []
 
   const currentMonth = useMemo(() => {
-    return new Date().toLocaleString('default', {
-      month: 'long',
-      year: 'numeric'
-    })
+    const now = new Date()
+    return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`
   }, [])
 
   const currentMonthTotal = useMemo(() => {
