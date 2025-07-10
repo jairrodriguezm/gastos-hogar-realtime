@@ -31,9 +31,9 @@ function App() {
   return (
     <main className="expenses">
       <MainNav />
-      <ExpenseForm onExpenseSaved={refetch} />
-      <ExpenseList expenses={expenses} />
       <TotalSummary amount={currentMonthTotal} />
+      <ExpenseList expenses={expenses} />
+      <ExpenseForm onExpenseSaved={refetch} />
     </main>
   )
 }
