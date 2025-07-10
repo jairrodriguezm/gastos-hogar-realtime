@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import type { Person} from '../models/expense';
-import { ADD_EXPENSE } from '../graphql/mutations'
+import type { Person} from '../../models/expense';
+import { ADD_EXPENSE } from '../../graphql/mutations'
+
+import './ExpenseForm.scss';
 
 type Props = {
   onExpenseSaved : () => void

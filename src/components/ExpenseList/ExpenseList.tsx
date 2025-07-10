@@ -1,4 +1,4 @@
-import type { Expense } from '../models/expense';
+import type { Expense } from '../../models/expense';
 
 type Props = {
   expenses: Expense[]

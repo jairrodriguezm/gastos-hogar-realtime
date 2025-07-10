@@ -1,0 +1,22 @@
+@use './variables' as *;
+@use './mixins' as *;
+
+body {
+  margin: 0;
+  font-family: $fontFamilyText;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  background-color: $bgColor;
+  color: $fontColor;
+}
+
+.material-symbols-outlined {
+  cursor: pointer;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 100,
+  'GRAD' -25,
+  'opsz' 24
+}
