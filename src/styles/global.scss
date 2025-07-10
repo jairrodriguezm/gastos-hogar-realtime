@@ -10,6 +10,13 @@ body {
   font-size: 16px;
   background-color: $bgColor;
   color: $fontColor;
+  height: 100vh;
+  // background: #020024;
+  // background: radial-gradient(circle, rgba(2, 0, 36, 1) 0%, rgba(11, 4, 20, 1) 0%, rgba(0, 0, 0, 1) 98%);
+  // background: #020024;
+  // background: linear-gradient(308deg, rgba(2, 0, 36, 1) 0%, rgba(12, 1, 23, 1) 0%, rgba(0, 0, 0, 1) 98%);
+  background: #080114;
+  background: linear-gradient(308deg, rgba(8, 1, 20, 1) 0%, rgba(0, 0, 0, 1) 88%, rgba(0, 0, 0, 1) 98%);
 }
 
 .material-symbols-outlined {
