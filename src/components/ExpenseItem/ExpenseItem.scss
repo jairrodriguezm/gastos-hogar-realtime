@@ -1,0 +1,17 @@
+@use '../../styles/variables' as *;
+
+.expense-item {
+    display: flex;
+    width: 100%;
+    background-color: #71717a1a;
+    -webkit-font-smoothing: auto;
+    padding: .75rem;
+    box-sizing: border-box;
+    background: rgba(129, 129, 129, 0.25); // blanco muy transparente
+    border-radius: 6px;
+    // border: $borderThin;
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(10px); // para Safari
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
