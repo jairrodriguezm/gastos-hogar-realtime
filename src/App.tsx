@@ -12,7 +12,7 @@ import './App.scss'
 function App() {
   const { data, loading, error, refetch } = useQuery(GET_EXPENSES);
   
-  const expenses: Expense[] = data?.gastos ?? []
+  const expenses: Expense[] = data?.gastos ?? [];
 
   const currentMonth = useMemo(() => {
     const now = new Date()

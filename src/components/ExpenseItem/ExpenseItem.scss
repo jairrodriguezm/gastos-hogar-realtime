@@ -2,16 +2,54 @@
 
 .expense-item {
     display: flex;
+    justify-content: space-between;
     width: 100%;
     background-color: #71717a1a;
     -webkit-font-smoothing: auto;
     padding: .75rem;
     box-sizing: border-box;
-    background: rgba(129, 129, 129, 0.25); // blanco muy transparente
+    background: rgba(129, 129, 129, 0.25); 
     border-radius: 6px;
     // border: $borderThin;
     backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(10px); // para Safari
+    -webkit-backdrop-filter: blur(10px); //Safari
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+
+    &__container1 {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    &__container2 {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    &__month {
+        color: #A1A1AA;
+        font-size: 14px;
+        font-weight: 500;
+        text-transform: capitalize;
+    }
+
+    &__name {
+        color: #E4E4E7;
+        font-size: 24px;
+        font-weight: 600;
+    }
+
+    &__person {
+        color: #A1A1AA;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    &__amount {
+        color: #E4E4E7;
+        font-size: 24px;
+        font-weight: 600;
+    }
 }
 
