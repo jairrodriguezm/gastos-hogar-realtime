@@ -4,6 +4,7 @@
     padding: 0.75rem;
     display: flex;
     gap: 0.75rem;
+    width: 100%;
 
     &__container {
         display: flex;
@@ -32,7 +33,7 @@
 
     &__amount {
         color: #E4E4E7;
-        font-size: 32px;
+        font-size: clamp(18px, 2rem, 1.6rem);
         font-weight: 600;
     }
 }
