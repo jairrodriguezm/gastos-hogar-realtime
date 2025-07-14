@@ -35,3 +35,7 @@ body {
 *::after {
   box-sizing: border-box;
 }
+
+label, input, select, form {
+  font-family: $fontFamilyText;
+}

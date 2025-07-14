@@ -36,7 +36,7 @@
 
     &__name {
         color: #E4E4E7;
-        font-size: 24px;
+        font-size: clamp(21px, 1.3rem, 1.8rem);
         font-weight: 600;
     }
 
@@ -48,7 +48,7 @@
 
     &__amount {
         color: #E4E4E7;
-        font-size: 24px;
+        font-size: clamp(21px, 1.3rem, 1.8rem);
         font-weight: 600;
     }
 }

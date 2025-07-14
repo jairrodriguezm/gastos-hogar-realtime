@@ -59,14 +59,14 @@ export default function ExpenseForm({ onExpenseSaved }: Props) {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-4 p-4">
-        <div className="flex flex-col">
-            <label className="label">
+        <form onSubmit={handleSubmit} className="create-expense">
+        <div className="create-expense__field">
+            <label className="create-expense__label">
                 <span className="label-text">Factura</span>
             </label>
             <input
             type="text"
-            className="input input-bordered"
+            className="create-expense__input"
             placeholder="Ej. Verduras"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -74,13 +74,13 @@ export default function ExpenseForm({ onExpenseSaved }: Props) {
             />
         </div>
 
-        <div className="flex flex-col">
-            <label className="label">
+        <div className="create-expense__field">
+            <label className="create-expense__label">
                 <span className="label-text">Monto (COP)</span>
             </label>
             <input
             type="text"
-            className="input input-bordered"
+            className="create-expense__input"
             placeholder="Ej. 52.000"
             value={amount}
             onChange={(e) => setAmount(formatCurrency(e.target.value))}
@@ -88,12 +88,12 @@ export default function ExpenseForm({ onExpenseSaved }: Props) {
             />
         </div>
 
-        <div className="flex flex-col">
-            <label className="label">
+        <div className="create-expense__field">
+            <label className="create-expense__label">
                 <span className="label-text">Persona</span>
             </label>
             <select
-            className="select select-bordered"
+            className="create-expense__input"
             value={person}
             onChange={(e) => setPerson(e.target.value as Person)}
             >
@@ -102,20 +102,20 @@ export default function ExpenseForm({ onExpenseSaved }: Props) {
             </select>
         </div>
 
-        <div className="flex flex-col">
-            <label className="label">
+        <div className="create-expense__field">
+            <label className="create-expense__label">
                 <span className="label-text">Mes</span>
             </label>
             <input
             type="month"
-            className="input input-bordered"
+            className="create-expense__input"
             placeholder="Ej. Julio 2025"
             value={month}
             onChange={(e) => setMonth(e.target.value)}
             />
         </div>
 
-        <button type="submit" className="btn btn-primary w-full" disabled={loading}>
+        <button type="submit" className="create-expense__submit" disabled={loading}>
             {loading ? 'Saving...' : 'Add Expense'}
         </button>
         </form>
