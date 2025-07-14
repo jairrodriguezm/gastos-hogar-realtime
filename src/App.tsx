@@ -25,13 +25,18 @@ function App() {
       .reduce((sum, e) => sum + Number(e.amount), 0)
   }, [expenses, currentMonth])
 
+  const totalAmountValue = useMemo(() => {
+    return expenses
+      .reduce((sum, e) => sum + Number(e.amount), 0)
+  }, [expenses])
+
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error loading expenses: {error.message}</p>
 
   return (
     <main className="expenses">
       <MainNav />
-      <TotalSummary amount={currentMonthTotal} />
+      <TotalSummary totalAmount={totalAmountValue} month={currentMonth} monthTotal={currentMonthTotal}/>
       <ExpenseList expenses={expenses} />
       <ExpenseForm onExpenseSaved={refetch} />
     </main>

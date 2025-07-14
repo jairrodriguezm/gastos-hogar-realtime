@@ -1,19 +1,24 @@
+import "./TotalSummary.scss";
+import { formatCOP, formatMonthYear } from '../../utils/format';
+
 type Props = {
-  amount: number
+    totalAmount: number;
+    month: string;
+    monthTotal: number;
 }
 
-export default function TotalSummary({ amount }: Props) {
-    
-    const formattedAmount = new Intl.NumberFormat('es-CO', {
-        style: 'currency',
-        currency: 'COP',
-        minimumFractionDigits: 0
-    }).format(amount)
+export default function TotalSummary({ totalAmount, month, monthTotal}: Props) {
     
     return (
-        <div className="p-4 bg-base-200 rounded-box shadow text-center">
-            <p className="text-lg font-medium">Current month total:</p>
-            <p className="text-2xl font-bold text-primary">{formattedAmount}</p>
+        <div className="total-summary">
+            <div className="total-summary__container">
+                <span className="total-summary__month">Total {formatMonthYear(month)}</span>
+                <span className="total-summary__amount">{ formatCOP(monthTotal) }</span>
+            </div>
+            <div className="total-summary__container">
+                <span className="total-summary__month">Total All Expenses</span>
+                <span className="total-summary__amount">{ formatCOP(totalAmount) }</span>
+            </div>
         </div>
     )
 }

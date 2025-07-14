@@ -13,9 +13,10 @@ export default function ExpenseList({ expenses }: Props) {
 
     return (
         <div className="expense-list">
-        {expenses.map((expense) => (
-            <ExpenseItem expense={expense} />
-        ))}
+            <h3 className='expense-list__title'>Expenses</h3>
+            {expenses.map((expense) => (
+                <ExpenseItem expense={expense} />
+            ))}
         </div>
     )
 }

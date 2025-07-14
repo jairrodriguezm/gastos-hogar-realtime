@@ -1,0 +1,38 @@
+@use '../../styles/variables' as *;
+
+.total-summary {
+    padding: 0.75rem;
+    display: flex;
+    gap: 0.75rem;
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 100%;
+        padding: 0.75rem;
+        background-color: #61479561;
+        -webkit-font-smoothing: auto;
+        box-sizing: border-box;
+        background: rgba(97, 71, 149, 0.38); 
+        border-radius: 6px;
+         border: $borderThin;
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(10px); //Safari
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    &__month {
+        color: #A1A1AA;
+        font-size: 14px;
+        font-weight: 500;
+        text-transform: capitalize;
+        padding-bottom: 0.5rem;
+    }
+
+    &__amount {
+        color: #E4E4E7;
+        font-size: 32px;
+        font-weight: 600;
+    }
+}
