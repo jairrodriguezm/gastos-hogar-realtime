@@ -1,8 +1,32 @@
+import { useEffect, useState } from 'react';
 import './MainNav.scss';
 
 export default function MainNav() {
+    const [hidden, setHidden] = useState(false);
+    const [prevScroll, setPrevScroll] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+        const currentScroll = window.scrollY;
+
+        if (Math.abs(currentScroll - prevScroll) < 10) return; 
+
+        if (currentScroll < prevScroll) {
+            setHidden(false); 
+        } else {
+            setHidden(true);
+        }
+
+        setPrevScroll(currentScroll);
+        };
+
+        window.addEventListener("scroll", handleScroll);
+
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [prevScroll]);
+
     return (
-        <div className='main-nav'>
+        <div className={`main-nav ${hidden ? "hidden" : ""}`}>
             <div className='main-nav__app-logo'>
                 <span className='main-nav__app-logo--text'>Home Expenses</span>
             </div>

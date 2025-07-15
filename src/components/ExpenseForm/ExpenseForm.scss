@@ -28,6 +28,14 @@
             appearance: none;
             -webkit-appearance: none;
             -moz-appearance: none;
+            text-align: left !important;
+            display: inline-block;
+            width: 100%;
+
+            &::-webkit-calendar-picker-indicator {
+                filter: invert(1);
+                opacity: 1;
+            }
         }
     }
 

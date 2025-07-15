@@ -12,7 +12,12 @@
     border-bottom: $borderThin;
     top: 0;
     overflow: hidden;
+    transition: transform 0.3s ease;
     z-index: 100;
+
+    &.hidden {
+        transform: translateY(-100%);
+    }
 
     
     &__app-logo {
