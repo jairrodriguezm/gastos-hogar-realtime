@@ -23,8 +23,11 @@
             background-size: 1rem;
         }
 
-        input[type=month] {
+        input[type="month"] {
             text-transform: uppercase;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
         }
     }
 
