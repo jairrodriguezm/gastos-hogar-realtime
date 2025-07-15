@@ -9,7 +9,9 @@ export default function MainNav() {
         const handleScroll = () => {
         const currentScroll = window.scrollY;
 
-        if (Math.abs(currentScroll - prevScroll) < 10) return; 
+        console.log(currentScroll);
+
+        if (currentScroll <= 0 || Math.abs(currentScroll - prevScroll) < 100) return; 
 
         if (currentScroll < prevScroll) {
             setHidden(false); 

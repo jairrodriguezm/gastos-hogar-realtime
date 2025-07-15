@@ -6,6 +6,7 @@ import MainNav from './components/MainNav/MainNav'
 import type { Expense } from './models/expense'
 import { useQuery } from '@apollo/client'
 import { GET_EXPENSES } from './graphql/queries'
+import logo from './assets/icons/gastos-icon.png'
 
 import './App.scss'
 
@@ -30,7 +31,7 @@ function App() {
       .reduce((sum, e) => sum + Number(e.amount), 0)
   }, [expenses])
 
-  if (loading) return <p>Loading...</p>
+  if (loading) return <div className='loading-container'><img src={logo} /></div>
   if (error) return <p>Error loading expenses: {error.message}</p>
 
   return (
