@@ -4,6 +4,7 @@ import type { Person} from '../../models/expense';
 import { ADD_EXPENSE } from '../../graphql/mutations'
 
 import './ExpenseForm.scss';
+import { useCreateForm } from '../../contexts/useCreateForm';
 
 type Props = {
   onExpenseSaved : () => void
@@ -18,7 +19,9 @@ export default function ExpenseForm({ onExpenseSaved }: Props) {
         return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`
     })
 
-    const [addExpense, { loading }] = useMutation(ADD_EXPENSE)
+    const [addExpense, { loading }] = useMutation(ADD_EXPENSE);
+
+    const { isCreateModalOpen, closeCreateModal } = useCreateForm();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -36,12 +39,13 @@ export default function ExpenseForm({ onExpenseSaved }: Props) {
             })
 
             // reset form
-            setName('')
-            setAmount('')
-            setMonth(getCurrentMonth())
-            setPerson('Jair')
+            setName('');
+            setAmount('');
+            setMonth(getCurrentMonth());
+            setPerson('Jair');
 
-            onExpenseSaved()
+            onExpenseSaved();
+            closeCreateModal();
         } catch (err) {
             console.error('Error saving expense:', err)
         }
@@ -58,16 +62,17 @@ export default function ExpenseForm({ onExpenseSaved }: Props) {
         return `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}`
     }
 
+    if (!isCreateModalOpen) return null;
     return (
         <form onSubmit={handleSubmit} className="create-expense">
         <div className="create-expense__field">
             <label className="create-expense__label">
-                <span className="label-text">Factura</span>
+                <span className="label-text">Expense name</span>
             </label>
             <input
             type="text"
             className="create-expense__input"
-            placeholder="Ej. Verduras"
+            placeholder="E.g. Fruits and vegetables"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
@@ -76,12 +81,12 @@ export default function ExpenseForm({ onExpenseSaved }: Props) {
 
         <div className="create-expense__field">
             <label className="create-expense__label">
-                <span className="label-text">Monto (COP)</span>
+                <span className="label-text">Amount (COP)</span>
             </label>
             <input
             type="text"
             className="create-expense__input"
-            placeholder="Ej. 52.000"
+            placeholder="E.g. 52.000"
             value={amount}
             onChange={(e) => setAmount(formatCurrency(e.target.value))}
             required
@@ -90,7 +95,7 @@ export default function ExpenseForm({ onExpenseSaved }: Props) {
 
         <div className="create-expense__field">
             <label className="create-expense__label">
-                <span className="label-text">Persona</span>
+                <span className="label-text">Person</span>
             </label>
             <select
             className="create-expense__input"
@@ -104,7 +109,7 @@ export default function ExpenseForm({ onExpenseSaved }: Props) {
 
         <div className="create-expense__field">
             <label className="create-expense__label">
-                <span className="label-text">Mes</span>
+                <span className="label-text">Month</span>
             </label>
             <input
             type="month"
