@@ -8,12 +8,7 @@ export function formatCOP(value: number): string {
 
 export function formatMonthYear(input: string): string {
     const [year, month] = input.split('-');
-    const date = new Date(Number(year), Number(month) - 1); // mes base 0
+    const date = new Date(Number(year), Number(month) - 1);
 
-    //   return new Intl.DateTimeFormat('es-CO', {
-    //     month: 'long',
-    //     year: 'numeric',
-    //   }).format(date);
-
-    return `${date.toLocaleString('es-CO', { month: 'long' })} ${year}`;
+    return `${date.toLocaleString('en-US', { month: 'long' })} ${year}`;
 }
