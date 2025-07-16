@@ -1,18 +1,41 @@
+import { useMutation, type Reference, type StoreObject } from '@apollo/client';
 import type { Expense } from '../../models/expense';
 import ExpenseItem from '../ExpenseItem/ExpenseItem';
 import './ExpenseList.scss';
+import { DELETE_EXPENSE } from '../../graphql/mutations';
+import { GET_EXPENSES } from '../../graphql/queries';
 
 type Props = {
   expenses: Expense[]
 }
 
 export default function ExpenseList({ expenses }: Props) {
+    const [deleteExpense] = useMutation(DELETE_EXPENSE, {
+        update(cache, { data }) {
+        cache.modify({
+            fields: {
+                gastos(existingRefs = [], { readField }) {
+                    return existingRefs.filter(
+                        (ref: Reference | StoreObject | undefined) => readField('id', ref) !== data.delete_gastos_by_pk.id
+                    )
+                }
+            }
+        })
+        },
+        refetchQueries: [{ query: GET_EXPENSES }]
+    })
+
     if (expenses.length === 0) {
         return <p className="text-center text-gray-500">Not available expenses</p>
     }
 
     const handleDeleteItem = (itemId: string) => {
-        console.log("========> ",itemId);
+        deleteExpense({
+            variables: { id: itemId },
+            optimisticResponse: {
+                delete_gastos_by_pk: { id: itemId, __typename: 'gastos' }
+            }
+        })
     }
 
     return (

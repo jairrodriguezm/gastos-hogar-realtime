@@ -1,69 +1,77 @@
-# React + TypeScript + Vite
+# Gastos del Hogar
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Una aplicación PWA moderna para llevar el control mensual de los gastos del hogar, desarrollada con tecnologías de vanguardia y diseñada para brindar una experiencia rápida, responsiva y confiable.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Características principales
 
-## Expanding the ESLint configuration
+* **React + TypeScript + Vite**: Combina la productividad de Vite con la robustez de React y tipado estático con TypeScript para un desarrollo ultrarrápido y seguro.
+* **PWA Ready**: Configuración de `vite-plugin-pwa` para instalación en dispositivos, uso offline y actualizaciones automáticas a través de service worker. ([raw.githubusercontent.com](https://raw.githubusercontent.com/jairrodriguezm/gastos-hogar-realtime/main/vite.config.ts))
+* **GraphQL con Apollo Client**: Integración con Hasura GraphQL para operaciones CRUD. Incluye mutación optimizada `ADD_EXPENSE` y consulta eficiente `GET_EXPENSES` para consultar gastos ordenados por fecha. ([raw.githubusercontent.com](https://raw.githubusercontent.com/jairrodriguezm/gastos-hogar-realtime/main/src/graphql/mutations.ts), [raw.githubusercontent.com](https://raw.githubusercontent.com/jairrodriguezm/gastos-hogar-realtime/main/src/graphql/queries.ts))
+* **Actualizaciones en tiempo real**: Arquitectura preparada para suscripciones GraphQL que reflejan al instante los cambios en los gastos.
+* **Eliminación con long-press**: Hook personalizado `useLongPress` que detecta toques prolongados (>1s) para confirmar y eliminar ítems de la lista de gastos.
+* **Optimistic UI**: Actualiza la interfaz inmediatamente al eliminar o agregar gastos, mejorando la sensación de rapidez.
+* **SCSS Modular y Glassmorphism**: Estilos mantenibles con SCSS que incluyen efectos de "glassmorphism" y variables para theming.
+* **Mobile-first y accesible**: Diseño y componentes optimizados para pantallas pequeñas, con soporte táctil y consideraciones de accesibilidad.
+* **Despliegue automático en Vercel**: URL pública con despliegue continuo en Vercel. ([github.com](https://github.com/jairrodriguezm/gastos-hogar-realtime))
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Tecnologías y Herramientas
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+* **Lenguaje**: TypeScript
+* **Framework**: React
+* **Bundler**: Vite con HMR
+* **PWA**: vite-plugin-pwa
+* **Estilos**: SCSS
+* **GraphQL**: Hasura + Apollo Client
+* **Gestión de estado**: Apollo Client cache y mutaciones optimistas
+* **Hook personalizado**: `useLongPress` para interacción táctil
+* **Despliegue**: Vercel
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## Instalación y Ejecución
+
+```bash
+# Clona el repositorio
+git clone https://github.com/jairrodriguezm/gastos-hogar-realtime.git
+cd gastos-hogar-realtime
+
+# Instala dependencias
+npm install
+
+# Configura variables de entorno
+# Crea un archivo .env y define el endpoint de GraphQL:
+# VITE_GRAPHQL_API_URL=https://tu-hasura-endpoint
+
+# Inicia en modo desarrollo
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+La aplicación se ejecutará en `http://localhost:5173/` con recarga en caliente.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Despliegue
+
+Para generar la versión de producción:
+
+```bash
+npm run build
 ```
+
+Vercel detecta automáticamente el proyecto y lo despliega en cada push al repositorio.
+
+---
+
+## Contribuciones
+
+¡Las contribuciones son bienvenidas! Por favor abre un *issue* o un *pull request* describiendo tus cambios.
+
+---
+
+## Licencia
+
+MIT © Jair Rodríguez

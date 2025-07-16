@@ -13,3 +13,11 @@ export const ADD_EXPENSE = gql`
     }
   }
 `
+
+export const DELETE_EXPENSE = gql`
+  mutation DeleteExpense($id: uuid!) {
+    delete_gastos_by_pk(id: $id) {
+      id
+    }  
+  }
+`
