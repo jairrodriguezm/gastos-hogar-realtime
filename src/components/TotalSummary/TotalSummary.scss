@@ -5,10 +5,16 @@
     display: flex;
     gap: 0.75rem;
     width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
 
     &__container {
         display: flex;
         flex-direction: column;
+        flex: 0 0 48%;
+        box-sizing: border-box;
         justify-content: flex-start;
         width: 100%;
         padding: 0.75rem;
@@ -17,13 +23,13 @@
         box-sizing: border-box;
         background: rgba(97, 71, 149, 0.38); 
         border-radius: 6px;
-         border: $borderThin;
+        border: $borderThin;
         backdrop-filter: blur(30px);
         -webkit-backdrop-filter: blur(10px); //Safari
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
     }
 
-    &__month {
+    &__month, &__year {
         color: #A1A1AA;
         font-size: 14px;
         font-weight: 500;
@@ -31,9 +37,24 @@
         padding-bottom: 0.3rem;
     }
 
-    &__amount {
+    &__year {
+        padding-top: 0.2rem;
+    }
+
+    &__amount-month, &__amount-year {
         color: #E4E4E7;
         font-size: clamp(18px, 2rem, 1.6rem);
         font-weight: 600;
+    }
+
+    &__amount-year {
+        font-size: clamp(16px, 1.5rem, 0.8rem);
+        font-weight: 700;
+        background-color: rgba(88, 24, 151, 0.5215686275);
+        padding: 5px;
+        border-radius: 6px;
+        color: #9353d3;
+        display: inline-block;
+        width: fit-content;
     }
 }

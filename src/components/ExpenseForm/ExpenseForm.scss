@@ -40,6 +40,15 @@
                 filter: invert(1);
                 opacity: 1;
             }
+
+            &::-webkit-datetime-edit-fields-wrapper {
+                justify-content: flex-start !important;
+
+            }
+
+            &::-webkit-datetime-edit-month-field, &::-webkit-datetime-edit-text {
+                text-align: left !important;
+            }
         }
     }
 
