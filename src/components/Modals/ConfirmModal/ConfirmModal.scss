@@ -1,0 +1,52 @@
+@use '../../../styles/variables' as *;
+
+.confirm-modal {
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #2a1f41c2;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem 1rem;
+        background-color: #581897;
+        border-radius: 12px;
+        width: clamp(50%, 80%, 85%);
+        box-shadow: 3px -3px 200px 114px rgba(97, 71, 149, 0.38);
+        text-align: center;
+    }
+
+    &__message {
+        font-weight: 600;
+        font-size: 1.2rem;
+        color: #c183ff;
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+        button {
+            background: none;
+            border: 2px solid #9353d3;
+            color: #ddbbff;
+            padding: 0.9rem 1rem;
+            font-weight: 700;
+            font-size: 16px;
+            border-radius: 6px;
+        }
+
+        &--confirm {
+            box-shadow: 2px 2px 2px 0px rgba(255, 255, 255, 0.3);
+        }
+    }
+}

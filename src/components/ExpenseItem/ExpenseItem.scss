@@ -60,5 +60,12 @@
         font-size: clamp(21px, 1.3rem, 1.8rem);
         font-weight: 600;
     }
+
+    .delete-item {
+        background-color: #f7141482;
+        transition: all 0.3s;
+    }
 }
+
+
 
