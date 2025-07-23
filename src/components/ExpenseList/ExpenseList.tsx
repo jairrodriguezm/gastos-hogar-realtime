@@ -26,7 +26,7 @@ export default function ExpenseList({ expenses }: Props) {
     })
 
     if (expenses.length === 0) {
-        return <p className="text-center text-gray-500">Not available expenses</p>
+        return <p className="not-available">Not available expenses</p>
     }
 
     const handleDeleteItem = (itemId: string) => {
