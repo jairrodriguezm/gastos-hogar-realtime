@@ -11,6 +11,20 @@
         padding: 0;
         margin: 0;
         font-size: 2.3rem;
+        display: inline-block;
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-flow: row;
+    }
+
+    &__filter-btn {
+        font-variation-settings: "FILL" 0, "wght" 300, "GRAD" -25, "opsz" 24 !important;
+        font-size: 36px;
+        padding: 10px 5px 0 0;
     }
 }
 

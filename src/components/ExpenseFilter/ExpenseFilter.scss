@@ -1,0 +1,60 @@
+@use '../../styles/variables' as *;
+
+.expense-filter {
+    padding: 0.5rem 0;
+    border-bottom: $borderThin;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background-color: #6d379538;
+
+    &__field {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: flex-start;
+
+        & input[type=month] {
+            text-transform: uppercase;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            text-align: left !important;
+            display: inline-block;
+            width: 100%;
+
+            &::-webkit-calendar-picker-indicator {
+                filter: invert(1);
+                opacity: 1;
+            }
+
+            &::-webkit-datetime-edit-fields-wrapper {
+                justify-content: flex-start !important;
+
+            }
+
+            &::-webkit-datetime-edit-month-field, &::-webkit-datetime-edit-text {
+                text-align: left !important;
+            }
+        }
+    }
+
+    &__label {
+        color: #E4E4E7;
+        font-size: 14px;
+        font-weight: 600;
+        padding-bottom: 0.3rem;
+    }
+
+    &__input {
+        border-radius: 6px;
+        background-color: #5b5b5bbd;
+        border: $borderThin;
+        font-size: 15px;
+        font-weight: 500;
+        color: #E4E4E7;
+        padding: 0.5rem 0.8rem !important;
+        text-align: left;
+
+    }
+}
