@@ -50,6 +50,11 @@ export default function ExpenseList({ expenses }: Props) {
     }
 
     const handleFilterBtn = () => {
+        if (showFilter) {
+            const now = new Date();
+            setFilterMonth(`${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`);
+            setPerson('All');
+        }
         setShowFilter(!showFilter);
     }
 
@@ -66,6 +71,7 @@ export default function ExpenseList({ expenses }: Props) {
                         setFilterMonth={setFilterMonth}
                         person={person}
                         setPerson={setPerson}
+                        expenses={expenses}
                     />
                 )}
             </div>

@@ -57,4 +57,58 @@
         text-align: left;
 
     }
+
+    &__summary {
+        margin-top: 0.5rem;
+        padding: 0.75rem;
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        border: $borderThin;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+    }
+
+    &__summary-header {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #d4d4d8;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    &__summary-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        gap: 0.5rem;
+    }
+
+    &__summary-card {
+        background-color: rgba(91, 91, 91, 0.35);
+        padding: 0.6rem 0.75rem;
+        border-radius: 6px;
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+
+        .member-name {
+            font-size: 0.75rem;
+            color: #a1a1aa;
+            font-weight: 500;
+        }
+
+        .member-amount {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        &--total {
+            background-color: rgba(109, 55, 149, 0.45);
+            
+            .member-name {
+                color: #e9d5ff;
+            }
+        }
+    }
 }
