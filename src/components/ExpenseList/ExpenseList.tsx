@@ -4,7 +4,7 @@ import ExpenseItem from '../ExpenseItem/ExpenseItem';
 import './ExpenseList.scss';
 import { DELETE_EXPENSE } from '../../graphql/mutations';
 import { GET_EXPENSES } from '../../graphql/queries';
-import {  useState } from 'react';
+import { useState } from 'react';
 import ExpenseFilter from '../ExpenseFilter/ExpenseFilter';
 
 type Props = {
@@ -13,6 +13,11 @@ type Props = {
 
 export default function ExpenseList({ expenses }: Props) {
     const [showFilter, setShowFilter] =  useState(false);
+    const [filterMonth, setFilterMonth] = useState(() => {
+        const now = new Date()
+        return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`
+    });
+    const [person, setPerson] = useState('All');
 
     const [deleteExpense] = useMutation(DELETE_EXPENSE, {
         update(cache, { data }) {
@@ -29,9 +34,11 @@ export default function ExpenseList({ expenses }: Props) {
         refetchQueries: [{ query: GET_EXPENSES }]
     })
 
-    if (expenses.length === 0) {
-        return <p className="not-available">Not available expenses</p>
-    }
+    const filteredExpenses = expenses.filter((expense) => {
+        const matchesMonth = filterMonth ? expense.month === filterMonth : true;
+        const matchesPerson = person === 'All' ? true : expense.person === person;
+        return matchesMonth && matchesPerson;
+    });
 
     const handleDeleteItem = (itemId: string) => {
         deleteExpense({
@@ -52,10 +59,23 @@ export default function ExpenseList({ expenses }: Props) {
                 <h3 className='expense-list__title'>Expenses</h3>
                 <span className='material-symbols-outlined expense-list__filter-btn' onClick={handleFilterBtn}>tune</span>
             </div>
-            <div>{showFilter && <ExpenseFilter></ExpenseFilter>}</div>
-            {expenses.map((expense) => (
-                <ExpenseItem key={expense.id} expense={expense} onDelete={handleDeleteItem} />
-            ))}
+            <div>
+                {showFilter && (
+                    <ExpenseFilter
+                        filterMonth={filterMonth}
+                        setFilterMonth={setFilterMonth}
+                        person={person}
+                        setPerson={setPerson}
+                    />
+                )}
+            </div>
+            {filteredExpenses.length === 0 ? (
+                <p className="not-available">No expenses found</p>
+            ) : (
+                filteredExpenses.map((expense) => (
+                    <ExpenseItem key={expense.id} expense={expense} onDelete={handleDeleteItem} />
+                ))
+            )}
         </div>
     )
 }

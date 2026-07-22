@@ -1,13 +1,13 @@
-import { useState } from 'react';
 import './ExpenseFilter.scss';
 
-export default function ExpenseFilter () {
-    const [filterMonth,setFilterMonth] =  useState(() => {
-        const now = new Date()
-        return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`
-    });
-    const [person, setPerson] = useState('All');
+type Props = {
+    filterMonth: string;
+    setFilterMonth: (month: string) => void;
+    person: string;
+    setPerson: (person: string) => void;
+}
 
+export default function ExpenseFilter ({ filterMonth, setFilterMonth, person, setPerson }: Props) {
     return (
         <div className='expense-filter'>
             <div className="expense-filter__field">
