@@ -19,7 +19,7 @@ function App() {
 
   return (
     <main className="expenses">
-      <MainNav />
+      <MainNav expenses={expenses} />
       <ExpenseForm onExpenseSaved={refetch} />
       <TotalSummary expenses={expenses} />
       <ExpenseList expenses={expenses} />

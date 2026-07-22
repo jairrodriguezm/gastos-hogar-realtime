@@ -11,7 +11,6 @@
     align-items: center;
     border-bottom: $borderThin;
     top: 0;
-    overflow: hidden;
     transition: transform 0.3s ease;
     z-index: 100;
 
@@ -58,6 +57,14 @@
             align-items: center;
             border-left: $borderThin;
             padding: 0 12px;
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.15s, background-color 0.15s;
+
+            &.active, &:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+                color: #c084fc;
+            }
         }
 
         &--create {
@@ -67,9 +74,69 @@
             align-items: center;
             border-left: $borderThin;
             padding: 0 12px;
+            cursor: pointer;
+            user-select: none;
+        }
+    }
+
+    &__dropdown-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 105;
+    }
+
+    &__dropdown {
+        position: absolute;
+        top: 62px;
+        right: 60px;
+        background-color: #1e1b2e;
+        border: $borderThin;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        padding: 0.4rem;
+        z-index: 110;
+        min-width: 150px;
+        animation: dropDownScale 0.15s ease-out;
+
+        &-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.65rem 0.9rem;
+            border-radius: 8px;
+            color: #f4f4f5;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.15s, color 0.15s;
+
+            &:hover {
+                background-color: rgba(109, 55, 149, 0.35);
+                color: #ffffff;
+            }
+
+            .item-icon {
+                font-size: 20px;
+                color: #c084fc;
+            }
         }
     }
 }
+
+@keyframes dropDownScale {
+    from {
+        opacity: 0;
+        transform: translateY(-8px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
 
 @keyframes shine {
   0% {
