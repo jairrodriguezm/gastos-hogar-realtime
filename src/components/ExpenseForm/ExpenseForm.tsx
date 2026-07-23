@@ -67,20 +67,6 @@ export default function ExpenseForm({ onExpenseSaved }: Props) {
         <form onSubmit={handleSubmit} className="create-expense">
         <div className="create-expense__field">
             <label className="create-expense__label">
-                <span className="label-text">Expense name</span>
-            </label>
-            <input
-            type="text"
-            className="create-expense__input"
-            placeholder="E.g. Fruits and vegetables"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            />
-        </div>
-
-        <div className="create-expense__field">
-            <label className="create-expense__label">
                 <span className="label-text">Amount (COP)</span>
             </label>
             <input
@@ -89,6 +75,20 @@ export default function ExpenseForm({ onExpenseSaved }: Props) {
             placeholder="E.g. 52.000"
             value={amount}
             onChange={(e) => setAmount(formatCurrency(e.target.value))}
+            required
+            />
+        </div>
+
+        <div className="create-expense__field">
+            <label className="create-expense__label">
+                <span className="label-text">Expense name</span>
+            </label>
+            <input
+            type="text"
+            className="create-expense__input"
+            placeholder="E.g. Fruits and vegetables"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             required
             />
         </div>
