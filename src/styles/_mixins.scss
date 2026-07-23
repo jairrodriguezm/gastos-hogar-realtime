@@ -81,4 +81,10 @@
     &::placeholder {
         color: rgba(255, 255, 255, 0.25);
     }
+
+    option {
+        background-color: #18142c;
+        color: $fontColor;
+        padding: 0.5rem;
+    }
 }

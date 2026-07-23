@@ -72,6 +72,13 @@ p {
     font-family: $fontFamilyText;
 }
 
+select {
+    option {
+        background-color: #18142c;
+        color: $fontColor;
+    }
+}
+
 // ─── Material Icons ───────────────────────────────────────────────────────────
 .material-symbols-outlined {
     cursor: pointer;

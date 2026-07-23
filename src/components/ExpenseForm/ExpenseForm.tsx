@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { EXPENSE_CATEGORIES, type Person } from '../../models/expense';
 import { ADD_EXPENSE } from '../../graphql/mutations';
+import { predictCategory } from '../../services/aiCategory';
 
 import './ExpenseForm.scss';
 import { useCreateForm } from '../../contexts/useCreateForm';
@@ -19,21 +20,40 @@ export default function ExpenseForm({ onExpenseSaved }: Props) {
         return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`
     });
     const [category, setCategory] = useState('');
+    const [isCategorizing, setIsCategorizing] = useState(false);
+    const [isCategoryAutoSet, setIsCategoryAutoSet] = useState(false);
 
     const [addExpense, { loading }] = useMutation(ADD_EXPENSE);
     const { isCreateModalOpen, closeCreateModal } = useCreateForm();
+
+    const handleNameBlur = async () => {
+        if (name && (!category || isCategoryAutoSet)) {
+            setIsCategorizing(true);
+            const predicted = await predictCategory(name);
+            setCategory(predicted);
+            setIsCategoryAutoSet(true);
+            setIsCategorizing(false);
+        }
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         if (!name || !amount || !person || !month) return
         try {
+            let finalCategory = category;
+            if (!finalCategory) {
+                setIsCategorizing(true);
+                finalCategory = await predictCategory(name);
+                setIsCategorizing(false);
+            }
+
             await addExpense({
                 variables: {
                     name,
                     amount: parseFloat(amount.replace(/\./g, '').replace(',', '.')),
                     person,
                     month,
-                    category: category ? category : null
+                    category: finalCategory ? finalCategory : null
                 }
             })
             // reset form
@@ -42,9 +62,11 @@ export default function ExpenseForm({ onExpenseSaved }: Props) {
             setMonth(getCurrentMonth());
             setPerson('Jair');
             setCategory('');
+            setIsCategoryAutoSet(false);
             onExpenseSaved();
             closeCreateModal();
         } catch (err) {
+            setIsCategorizing(false);
             console.error('Error saving expense:', err)
         }
     }
@@ -70,22 +92,7 @@ export default function ExpenseForm({ onExpenseSaved }: Props) {
                 {/* iOS drag handle */}
                 <div className="create-expense__handle" />
 
-                {/* 1. Amount */}
-                <div className="create-expense__field">
-                    <label className="create-expense__label">
-                        <span className="label-text">Amount (COP)</span>
-                    </label>
-                    <input
-                        type="text"
-                        className="create-expense__input"
-                        placeholder="0"
-                        value={amount}
-                        onChange={(e) => setAmount(formatCurrency(e.target.value))}
-                        required
-                    />
-                </div>
-
-                {/* 2. Expense name */}
+                {/* 1. Expense name */}
                 <div className="create-expense__field">
                     <label className="create-expense__label">
                         <span className="label-text">Expense name</span>
@@ -96,6 +103,22 @@ export default function ExpenseForm({ onExpenseSaved }: Props) {
                         placeholder="E.g. Fruits and vegetables"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
+                        onBlur={handleNameBlur}
+                        required
+                    />
+                </div>
+
+                {/* 2. Amount */}
+                <div className="create-expense__field">
+                    <label className="create-expense__label">
+                        <span className="label-text">Amount (COP)</span>
+                    </label>
+                    <input
+                        type="text"
+                        className="create-expense__input"
+                        placeholder="0"
+                        value={amount}
+                        onChange={(e) => setAmount(formatCurrency(e.target.value))}
                         required
                     />
                 </div>
@@ -138,7 +161,10 @@ export default function ExpenseForm({ onExpenseSaved }: Props) {
                     <select
                         className="create-expense__input"
                         value={category}
-                        onChange={(e) => setCategory(e.target.value)}
+                        onChange={(e) => {
+                            setCategory(e.target.value);
+                            setIsCategoryAutoSet(false);
+                        }}
                     >
                         <option value="">Select a category…</option>
                         {EXPENSE_CATEGORIES.map((cat) => (
@@ -147,8 +173,8 @@ export default function ExpenseForm({ onExpenseSaved }: Props) {
                     </select>
                 </div>
 
-                <button type="submit" className="create-expense__submit" disabled={loading}>
-                    {loading ? 'Saving…' : 'Add Expense'}
+                <button type="submit" className="create-expense__submit" disabled={loading || isCategorizing}>
+                    {isCategorizing ? 'Categorizing with AI...' : loading ? 'Saving…' : 'Add Expense'}
                 </button>
             </form>
         </>
