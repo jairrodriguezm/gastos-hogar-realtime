@@ -8,6 +8,7 @@ export const GET_EXPENSES = gql`
       amount
       person
       month
+      category
       created_at
     }
   }

@@ -1,14 +1,15 @@
 import { gql } from '@apollo/client'
 
 export const ADD_EXPENSE = gql`
-  mutation AddExpense($name: String!, $amount: numeric!, $person: String!, $month: String!) {
-    insert_gastos(objects: { name: $name, amount: $amount, person: $person, month: $month }) {
+  mutation AddExpense($name: String!, $amount: numeric!, $person: String!, $month: String!, $category: String) {
+    insert_gastos(objects: { name: $name, amount: $amount, person: $person, month: $month, category: $category }) {
       returning {
         id
         name
         amount
         person
         month
+        category
       }
     }
   }

@@ -38,7 +38,12 @@ export default function ExpenseItem({ expense, onDelete }: Props) {
     return (
         <div className={`expense-item ${deleting ? 'delete-item' : ''}`} {...longPress} onDoubleClick={handleDeleting}>
             <div className="expense-item__container1">
-                <span className="expense-item__month">{ formatMonthYear(expense.month) }</span>
+                <div className="expense-item__meta">
+                    <span className="expense-item__month">{ formatMonthYear(expense.month) }</span>
+                    {expense.category && (
+                        <span className="expense-item__category">{expense.category}</span>
+                    )}
+                </div>
                 <span className="expense-item__name">{expense.name}</span>
             </div>
             <div className="expense-item__container2">

@@ -36,11 +36,30 @@
         align-items: flex-end;
     }
 
+    &__meta {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        flex-wrap: wrap;
+    }
+
     &__month {
         color: #A1A1AA;
         font-size: 14px;
         font-weight: 500;
         text-transform: capitalize;
+    }
+
+    &__category {
+        color: #93c5fd;
+        background: rgba(59, 130, 246, 0.15);
+        border: 1px solid rgba(147, 197, 253, 0.28);
+        border-radius: 4px;
+        padding: 1px 6px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.2px;
+        line-height: 1.6;
     }
 
     &__name {
@@ -66,6 +85,3 @@
     background-color: #f7141480;
     transition: all 0.3s;
 }
-
-
-
