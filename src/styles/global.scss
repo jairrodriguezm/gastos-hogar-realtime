@@ -1,48 +1,94 @@
 @use './variables' as *;
 @use './mixins' as *;
 
+// ─── Root / Body ──────────────────────────────────────────────────────────────
 body {
-  margin: 0;
-  font-family: $fontFamilyText;
-  font-optical-sizing: auto;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  background-color: $bgColor;
-  color: $fontColor;
-  height: 100vh;
-  padding-top: env(safe-area-inset-top);
-  // background: #020024;
-  // background: radial-gradient(circle, rgba(2, 0, 36, 1) 0%, rgba(11, 4, 20, 1) 0%, rgba(0, 0, 0, 1) 98%);
-  background: #37214f;
-  background: radial-gradient(circle, rgba(55, 33, 79, 1) 0%, rgba(0, 0, 0, 1) 88%, rgba(0, 0, 0, 1) 98%);
-  // background: #020024;
-  // background: linear-gradient(308deg, rgba(2, 0, 36, 1) 0%, rgba(12, 1, 23, 1) 0%, rgba(0, 0, 0, 1) 98%);
-  // background: #080114;
-  // background: linear-gradient(308deg, rgba(8, 1, 20, 1) 0%, rgba(0, 0, 0, 1) 88%, rgba(0, 0, 0, 1) 98%);
+    margin: 0;
+    font-family: $fontFamilyText;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    color: $fontColor;
+    background-color: $bgColor;
+    min-height: 100vh;
+    padding-top: env(safe-area-inset-top);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    // Ambient orbs — iOS wallpaper depth feel
+    &::before {
+        content: '';
+        position: fixed;
+        top: -25%;
+        right: -15%;
+        width: 70vmax;
+        height: 70vmax;
+        background: radial-gradient(
+            circle,
+            rgba(120, 40, 220, 0.22) 0%,
+            rgba(80, 20, 160, 0.1) 40%,
+            transparent 70%
+        );
+        pointer-events: none;
+        z-index: 0;
+        animation: orbDrift1 18s ease-in-out infinite alternate;
+    }
+
+    &::after {
+        content: '';
+        position: fixed;
+        bottom: -20%;
+        left: -20%;
+        width: 65vmax;
+        height: 65vmax;
+        background: radial-gradient(
+            circle,
+            rgba(80, 20, 180, 0.18) 0%,
+            rgba(40, 10, 100, 0.08) 40%,
+            transparent 70%
+        );
+        pointer-events: none;
+        z-index: 0;
+        animation: orbDrift2 22s ease-in-out infinite alternate;
+    }
 }
 
-.material-symbols-outlined {
-  cursor: pointer;
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 100,
-  'GRAD' -25,
-  'opsz' 24
-}
-
+// ─── Box sizing ───────────────────────────────────────────────────────────────
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-label, input, select, form, button, p {
-  font-family: $fontFamilyText;
+// ─── Base elements ────────────────────────────────────────────────────────────
+label,
+input,
+select,
+form,
+button,
+p {
+    font-family: $fontFamilyText;
 }
 
-// html, body {
-//   overscroll-behavior-y: none; /* bloquea el rebote vertical */
-//   overflow-y: scroll;
-//   height: 100%;
-// }
+// ─── Material Icons ───────────────────────────────────────────────────────────
+.material-symbols-outlined {
+    cursor: pointer;
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 200,
+        'GRAD' -25,
+        'opsz' 24;
+}
+
+// ─── Orb animations ───────────────────────────────────────────────────────────
+@keyframes orbDrift1 {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(-5%, 8%) scale(1.08); }
+}
+
+@keyframes orbDrift2 {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(6%, -5%) scale(1.05); }
+}

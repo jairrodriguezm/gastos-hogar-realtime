@@ -1,5 +1,53 @@
-$bgColor: #000000;
+// ─── Background ───────────────────────────────────────────────────────────────
+$bgColor: #07060f;
+
+// ─── Typography ───────────────────────────────────────────────────────────────
 $fontColor: #ECEDEE;
-$fontFamilyTitle: "Merriweather", serif;
+$fontFamilyTitle: 'Inter', sans-serif;
 $fontFamilyText: 'Inter', sans-serif;
-$borderThin: 1px solid #e5e7eb3d;
+
+// ─── iOS Purple Accent ────────────────────────────────────────────────────────
+$accent:       #a855f7;
+$accentDark:   #7c3aed;
+$accentLight:  #c084fc;
+$accentGlow:   rgba(168, 85, 247, 0.35);
+$accentSubtle: rgba(168, 85, 247, 0.12);
+
+// ─── iOS System Colors ────────────────────────────────────────────────────────
+$iosRed:    #FF453A;
+$iosGreen:  #30D158;
+$iosYellow: #FFD60A;
+$iosOrange: #FF9F0A;
+$iosBlue:   #0A84FF;
+$iosTeal:   #5AC8FA;
+$iosPink:   #FF375F;
+$iosGray:   #8E8E93;
+
+// ─── Glass Surfaces ───────────────────────────────────────────────────────────
+$glassBg:           rgba(255, 255, 255, 0.055);
+$glassBgMedium:     rgba(255, 255, 255, 0.09);
+$glassBgStrong:     rgba(255, 255, 255, 0.13);
+$glassBgDark:       rgba(12, 10, 28, 0.82);
+$glassBorder:       rgba(255, 255, 255, 0.09);
+$glassBorderStrong: rgba(255, 255, 255, 0.16);
+
+// ─── Border Aliases ───────────────────────────────────────────────────────────
+$borderThin: 1px solid rgba(255, 255, 255, 0.09);
+
+// ─── Border Radii ─────────────────────────────────────────────────────────────
+$radiusXs:   8px;
+$radiusSm:   12px;
+$radiusMd:   16px;
+$radiusLg:   22px;
+$radiusXl:   28px;
+$radiusPill: 50px;
+$radiusSheet: 24px 24px 0 0;
+
+// ─── Shadows ──────────────────────────────────────────────────────────────────
+$shadowCard:   0 4px 24px rgba(0, 0, 0, 0.45), 0 1px 0 rgba(255, 255, 255, 0.05) inset;
+$shadowModal:  0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.08);
+$shadowGlow:   0 0 30px rgba(168, 85, 247, 0.25);
+
+// ─── Transitions ──────────────────────────────────────────────────────────────
+$transBase:   all 0.2s ease-out;
+$transSpring: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);

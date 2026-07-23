@@ -1,60 +1,78 @@
 @use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
 
 .total-summary {
     padding: 0.75rem;
     display: flex;
-    gap: 0.75rem;
+    gap: 0.65rem;
     width: 100%;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
+    position: relative;
+    z-index: 1;
 
     &__container {
         display: flex;
         flex-direction: column;
-        flex: 0 0 48%;
+        flex: 0 0 calc(50% - 0.35rem);
         box-sizing: border-box;
-        justify-content: flex-start;
-        width: 100%;
-        padding: 0.75rem;
-        background-color: #61479561;
-        -webkit-font-smoothing: auto;
-        box-sizing: border-box;
-        background: rgba(97, 71, 149, 0.38); 
-        border-radius: 6px;
-        border: $borderThin;
-        backdrop-filter: blur(30px);
-        -webkit-backdrop-filter: blur(10px); //Safari
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        padding: 0.9rem 1rem;
+        border-radius: $radiusMd;
+        position: relative;
+        overflow: hidden;
+        cursor: default;
+        transition: transform 0.15s ease;
+
+        @include glass(28px, rgba(120, 60, 200, 0.1), rgba(168, 85, 247, 0.18));
+
+        &:active {
+            transform: scale(0.98);
+        }
+
+        // Subtle top-left glow accent
+        &::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            left: -20%;
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
     }
 
-    &__month, &__year {
-        color: #A1A1AA;
-        font-size: 14px;
-        font-weight: 500;
-        text-transform: capitalize;
-        padding-bottom: 0.3rem;
+    &__month,
+    &__year {
+        @include label-xs;
+        padding-bottom: 0.25rem;
     }
 
     &__year {
-        padding-top: 0.2rem;
+        padding-top: 0.6rem;
     }
 
-    &__amount-month, &__amount-year {
-        color: #E4E4E7;
-        font-size: clamp(18px, 2rem, 1.6rem);
-        font-weight: 600;
+    &__amount-month {
+        color: #f4f4f5;
+        font-size: clamp(15px, 4.5vw, 22px);
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        line-height: 1.2;
     }
 
     &__amount-year {
-        font-size: clamp(16px, 1.5rem, 0.8rem);
+        color: $accentLight;
+        font-size: clamp(13px, 3.5vw, 16px);
         font-weight: 700;
-        background-color: rgba(88, 24, 151, 0.5215686275);
-        padding: 5px;
-        border-radius: 6px;
-        color: #9353d3;
+        background: rgba(168, 85, 247, 0.18);
+        border: 1px solid rgba(168, 85, 247, 0.25);
+        padding: 3px 8px;
+        border-radius: $radiusPill;
         display: inline-block;
         width: fit-content;
+        margin-top: 2px;
+        letter-spacing: -0.2px;
     }
 }

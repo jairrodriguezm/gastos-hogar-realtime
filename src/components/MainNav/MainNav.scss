@@ -1,4 +1,5 @@
 @use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
 
 .main-nav {
     display: flex;
@@ -6,39 +7,43 @@
     position: sticky;
     height: 60px;
     flex-direction: row;
-    background-color: #000000;
     justify-content: space-between;
     align-items: center;
-    border-bottom: $borderThin;
     top: 0;
-    transition: transform 0.3s ease;
     z-index: 100;
+    transition: transform 0.3s ease;
+
+    // iOS-style translucent nav bar
+    background: rgba(7, 6, 15, 0.72);
+    backdrop-filter: saturate(180%) blur(22px);
+    -webkit-backdrop-filter: saturate(180%) blur(22px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 
     &.hidden {
         transform: translateY(-200%);
     }
 
-    
     &__app-logo {
         &--text {
-            font-size: clamp(21px, 8vw, 36px);;
+            font-size: clamp(18px, 5.5vw, 28px);
             padding-left: 1rem;
             margin: 0;
             font-family: $fontFamilyText;
-            font-weight: 200;
+            font-weight: 300;
+            letter-spacing: -0.3px;
             display: inline-block;
             background-image: linear-gradient(
-                300deg,
-                rgba(255, 255, 255, 0.3) 0%,
-                rgba(255, 255, 255, 0.8) 50%,
-                rgba(255, 255, 255, 0.3) 100%
+                135deg,
+                rgba(255, 255, 255, 0.55) 0%,
+                rgba(200, 160, 255, 0.9) 45%,
+                rgba(255, 255, 255, 0.55) 100%
             );
             background-size: 200% auto;
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
             -webkit-text-fill-color: transparent;
-            animation: shine 12s linear infinite;
+            animation: navShine 14s linear infinite;
         }
     }
 
@@ -51,31 +56,44 @@
         align-items: center;
 
         &--apps {
-            font-size: 40px;
+            font-size: 28px;
             display: flex;
             height: 100%;
             align-items: center;
-            border-left: $borderThin;
-            padding: 0 12px;
+            padding: 0 14px;
             cursor: pointer;
             user-select: none;
-            transition: color 0.15s, background-color 0.15s;
+            color: rgba(255, 255, 255, 0.6);
+            transition: color 0.15s ease, background 0.15s ease;
+            border-left: 1px solid rgba(255, 255, 255, 0.06);
 
-            &.active, &:hover {
-                background-color: rgba(255, 255, 255, 0.1);
-                color: #c084fc;
+            &.active,
+            &:hover {
+                color: $accentLight;
+                background: rgba(168, 85, 247, 0.08);
+            }
+
+            &:active {
+                transform: scale(0.9);
             }
         }
 
         &--create {
-            font-size: 40px;
+            font-size: 30px;
             display: flex;
             height: 100%;
             align-items: center;
-            border-left: $borderThin;
-            padding: 0 12px;
+            padding: 0 16px;
             cursor: pointer;
             user-select: none;
+            color: rgba(255, 255, 255, 0.85);
+            border-left: 1px solid rgba(255, 255, 255, 0.06);
+            transition: color 0.15s ease, transform 0.1s ease;
+
+            &:active {
+                transform: scale(0.88);
+                color: $accentLight;
+            }
         }
     }
 
@@ -90,37 +108,40 @@
 
     &__dropdown {
         position: absolute;
-        top: 62px;
-        right: 60px;
-        background-color: #1e1b2e;
-        border: $borderThin;
-        border-radius: 12px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-        padding: 0.4rem;
+        top: 66px;
+        right: 8px;
+        border-radius: $radiusMd;
+        padding: 0.35rem;
         z-index: 110;
-        min-width: 150px;
-        animation: dropDownScale 0.15s ease-out;
+        min-width: 160px;
+        animation: dropDownScale 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+
+        @include glass(32px, rgba(28, 22, 50, 0.88), rgba(255, 255, 255, 0.12));
 
         &-item {
             display: flex;
             align-items: center;
-            gap: 0.6rem;
-            padding: 0.65rem 0.9rem;
-            border-radius: 8px;
+            gap: 0.65rem;
+            padding: 0.7rem 1rem;
+            border-radius: $radiusSm;
             color: #f4f4f5;
             font-size: 0.95rem;
             font-weight: 500;
             cursor: pointer;
-            transition: background-color 0.15s, color 0.15s;
+            transition: background-color 0.15s ease;
 
             &:hover {
-                background-color: rgba(109, 55, 149, 0.35);
-                color: #ffffff;
+                background: rgba(168, 85, 247, 0.2);
+            }
+
+            &:active {
+                background: rgba(168, 85, 247, 0.3);
             }
 
             .item-icon {
                 font-size: 20px;
-                color: #c084fc;
+                color: $accentLight;
+                font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' -25, 'opsz' 24;
             }
         }
     }
@@ -129,7 +150,7 @@
 @keyframes dropDownScale {
     from {
         opacity: 0;
-        transform: translateY(-8px) scale(0.95);
+        transform: translateY(-10px) scale(0.94);
     }
     to {
         opacity: 1;
@@ -137,13 +158,7 @@
     }
 }
 
-
-@keyframes shine {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
+@keyframes navShine {
+    0%   { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
 }
-

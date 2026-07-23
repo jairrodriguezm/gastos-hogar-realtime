@@ -41,7 +41,7 @@ export default function ExpenseItem({ expense, onDelete }: Props) {
                 <div className="expense-item__meta">
                     <span className="expense-item__month">{ formatMonthYear(expense.month) }</span>
                     {expense.category && (
-                        <span className="expense-item__category">{expense.category}</span>
+                        <span className="expense-item__category" data-category={expense.category}>{expense.category}</span>
                     )}
                 </div>
                 <span className="expense-item__name">{expense.name}</span>

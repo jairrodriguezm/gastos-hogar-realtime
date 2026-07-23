@@ -1,0 +1,84 @@
+@use './variables' as *;
+
+// ─── Glass surface mixin ──────────────────────────────────────────────────────
+@mixin glass($blur: 24px, $bg: $glassBg, $border: $glassBorder) {
+    background: $bg;
+    backdrop-filter: blur($blur) saturate(180%);
+    -webkit-backdrop-filter: blur($blur) saturate(180%);
+    border: 1px solid $border;
+    box-shadow: $shadowCard;
+}
+
+@mixin glass-medium {
+    @include glass(28px, $glassBgMedium, $glassBorder);
+}
+
+@mixin glass-strong {
+    @include glass(40px, $glassBgStrong, $glassBorderStrong);
+}
+
+@mixin glass-dark {
+    background: $glassBgDark;
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    border: 1px solid $glassBorderStrong;
+    box-shadow: $shadowModal;
+}
+
+// ─── iOS-style primary button ─────────────────────────────────────────────────
+@mixin ios-btn-primary {
+    background: $accent;
+    color: #fff;
+    border: none;
+    border-radius: $radiusSm;
+    font-weight: 600;
+    font-size: 1.05rem;
+    font-family: $fontFamilyText;
+    padding: 0.9rem 1rem;
+    cursor: pointer;
+    width: 100%;
+    box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
+    transition: opacity 0.15s ease, transform 0.1s ease;
+
+    &:active {
+        opacity: 0.82;
+        transform: scale(0.98);
+    }
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+}
+
+// ─── Uppercase micro-label ────────────────────────────────────────────────────
+@mixin label-xs {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+// ─── iOS input field ──────────────────────────────────────────────────────────
+@mixin ios-input {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: $radiusSm;
+    color: $fontColor;
+    font-size: 1rem;
+    font-family: $fontFamilyText;
+    font-weight: 500;
+    padding: 0.8rem 1rem;
+    outline: none;
+    transition: border-color 0.2s ease, background 0.2s ease;
+
+    &:focus {
+        border-color: $accent;
+        background: rgba(168, 85, 247, 0.08);
+    }
+
+    &::placeholder {
+        color: rgba(255, 255, 255, 0.25);
+    }
+}
